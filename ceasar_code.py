@@ -1,19 +1,25 @@
 def caesar_cipher(text, shift, direction):
-    alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
-                'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+    # alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
+    #             'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
     result_text = ''
     for char in text:
-        if char in alphabet:
-            index = alphabet.index(char)
-            if direction == 'encode':
-                index = (index + shift) % 26
-            elif direction == 'decode':
-                index = (index - shift) % 26
-            result_text += alphabet[index]
+        if char.isalpha():  # Check if the character is a letter
+            start = ord('a') if char.islower() else ord('A')
+            index = (ord(char) - start + shift) % 26
+            result_text += chr(start + index)
         else:
-            result_text += char
+            result_text += char  # Keep non-alphabetic characters unchanged
     return result_text
+    # if char in alphabet:
+    #     index = alphabet.index(char)
+    #     if direction == 'encode':
+    #         index = (index + shift) % 26
+    #     elif direction == 'decode':
+    #         index = (index - shift) % 26
+    #     result_text += alphabet[index]
+    # else:
+    #     result_text += char
 
 
 def main():
